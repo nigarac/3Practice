@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ПрактическаяРабота3
 {
@@ -22,11 +23,42 @@ namespace ПрактическаяРабота3
     {
 
         public classes.PersonInfo Player = new classes.PersonInfo("студент", 100, 10 ,1,0,0,5);
+
+        public List<classes.PersonInfo> Enemys = new List<classes.PersonInfo>();
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
-        }
+            UserInfoPlayer();
 
-        
+            Enemys.Add(new classes.PersonInfo("Болотное чудовище", 100,20,1,15,5,20));
+            Enemys.Add(new classes.PersonInfo("Болотное чудовище", 20, 5, 1, 5, 5, 5));
+            Enemys.Add(new classes.PersonInfo("Болотное чудовище", 50, 3, 1, 1, 10, 15));
+            
+            dispatcherTimer.Tick += AttackPlayer;
+            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 10);
+            dispatcherTimer.Start();
+        }
+        private void AttackPlayer(object sender, System.EventArgs e)
+        {
+
+        }
+        public void UserInfoPlayer()
+        {
+            if (Player.Glasses > 100 * Player.Level)
+            {
+                Player.Level++;
+                Player.Glasses = 0;
+                Player.Health += 100;
+                Player.Damage++;
+                Player.Armor++;
+            }
+            playerHealth.Content = "Жизенные показатели: " + Player.Health;
+            playerArmor.Content = "Броня: " + Player.Armor;
+            playerLevel.Content = "Уровень: " + Player.Level;
+            playerGlasses.Content = "Опыт: " + Player.Glasses;
+            playerMoney.Content = "Монеты: " + Player.Money;
+
+        }
     }
 }

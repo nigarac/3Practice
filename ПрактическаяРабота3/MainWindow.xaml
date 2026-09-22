@@ -63,11 +63,13 @@
             </Grid>
         </Border>
         <Border
+        MouseDown = "AttackEmpty"
         BorderBrush="Black"
         BorderThickness="1"
         Margin="10"
         Background="#FFFDFDFD"
         Grid.Column="1">
+            
 
             <Grid>
                 <Image
@@ -92,8 +94,10 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Margin="10, 0, 0, 100"/>
+                
             </Grid>
         </Border>
+        
     </Grid>
 
 </Window>
