@@ -60,10 +60,11 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Margin="10, 0, 0, 10"/>
+                <Button Margin="209,346,74,42" Content="Оглушение" Click="Button_Click" Name="Оглушение"></Button>
             </Grid>
         </Border>
         <Border
-        MouseDown = "AttackEmpty"
+        MouseDown = "AttackEnemy"
         BorderBrush="Black"
         BorderThickness="1"
         Margin="10"

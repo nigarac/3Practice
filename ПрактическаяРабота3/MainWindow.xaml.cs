@@ -22,24 +22,24 @@ namespace ПрактическаяРабота3
     public partial class MainWindow : Window
     {
 
-        public classes.PersonInfo Player = new classes.PersonInfo("студент", 100, 10 ,1,0,0,5);
+        public classes.PersonInfo Player = new classes.PersonInfo("студент", 100, 10 ,1,0,0,9);
 
         public List<classes.PersonInfo> Enemys = new List<classes.PersonInfo>();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        public classes.PersonInfo Enemy = new classes.PersonInfo("enemy",100,10,1,0,0,5);
+        public classes.PersonInfo Enemy = new classes.PersonInfo("enemy",100,10,1,0,0,9);
         public MainWindow()
         {
             InitializeComponent();
             UserInfoPlayer();
 
             Enemys.Add(new classes.PersonInfo("Болотное чудовище", 100,20,1,15,5,20));
-            Enemys.Add(new classes.PersonInfo("Болотное чудовище", 20, 5, 1, 5, 5, 5));
-            Enemys.Add(new classes.PersonInfo("Болотное чудовище", 50, 3, 1, 1, 10, 15));
+            Enemys.Add(new classes.PersonInfo("маринад", 20, 5, 1, 5, 5, 5));
+            Enemys.Add(new classes.PersonInfo("ооао", 50, 3, 1, 1, 10, 15));
             
             dispatcherTimer.Tick += AttackPlayer;
-            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 10);
+            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
-            SelectEnemy(0);
+            SelectEnemy();
         }
         public void SelectEnemy()
         {
@@ -76,6 +76,28 @@ namespace ПрактическаяРабота3
             playerGlasses.Content = "Опыт: " + Player.Glasses;
             playerMoney.Content = "Монеты: " + Player.Money;
 
+        }
+        private void AttackEnemy(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Enemy.Health -= Convert.ToInt32(Player.Damage * 100f / (100f - Enemy.Armor));
+            if (Enemy.Health <= 0)
+            {
+                Player.Glasses += Enemy.Glasses;
+                Player.Money += Enemy.Money;
+                UserInfoPlayer();
+                SelectEnemy();
+            }
+            else
+            {
+                emptyHealth.Content = "Жизненные показатели: " + Enemy.Health;
+                emptyArmor.Content = "Броня: " + Enemy.Armor;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Stop();
+            Оглушение.Hidde
         }
     }
 }
