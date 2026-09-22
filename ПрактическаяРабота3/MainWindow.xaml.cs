@@ -26,6 +26,7 @@ namespace ПрактическаяРабота3
 
         public List<classes.PersonInfo> Enemys = new List<classes.PersonInfo>();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public classes.PersonInfo Enemy = new classes.PersonInfo("enemy",100,10,1,0,0,5);
         public MainWindow()
         {
             InitializeComponent();
@@ -38,10 +39,26 @@ namespace ПрактическаяРабота3
             dispatcherTimer.Tick += AttackPlayer;
             dispatcherTimer.Interval = new System.TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
+            SelectEnemy(0);
+        }
+        public void SelectEnemy()
+        {
+            int Id = new Random().Next(0,Enemys.Count);
+
+            Enemy = new classes.PersonInfo(
+                Enemys[Id].Name,
+                Enemys[Id].Health,
+                Enemys[Id].Armor,
+                Enemys[Id].Level,
+                Enemys[Id].Glasses,
+                Enemys[Id].Money,
+                Enemys[Id].Damage);
+
         }
         private void AttackPlayer(object sender, System.EventArgs e)
         {
-
+            Player.Health -= Convert.ToInt32(Enemy.Damage * 100f / (100f - Player.Armor));
+            UserInfoPlayer();
         }
         public void UserInfoPlayer()
         {
