@@ -20,8 +20,14 @@
         Background="#FFFDFDFD">
 
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Image
-                Margin="10,10,10.2,185.4"
+                Margin="10,10,10,185"
                 Source="/knight1.jpg"/>
                 <Label
                     
@@ -29,38 +35,44 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
-                Margin="10, 0, 0, 160"/>
+                Margin="10,0,0,160"/>
                 <Label
                 Content="Жизненные показатели: 100"
                     x:Name="playerHealth"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="10, 0, 0, 130"/>
+                Margin="10,0,0,130"/>
                 <Label
                 Content="Броня: 100"
                     x:Name="playerArmor"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="10, 0, 0, 100"/>
+                Margin="10,0,0,100"/>
                 <Label
                 Content="Уровень: 1"
                     x:Name="playerLevel"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="10, 0, 0, 70"/>
+                Margin="10,0,0,70"/>
                 <Label
                 Content="Опыт: 0"
                     x:Name="playerGlasses"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="10, 0, 0, 40"/>
+                Margin="10,0,0,40"/>
                 <Label
                 Content="Монеты: 0"
                     x:Name="playerMoney"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Margin="10, 0, 0, 10"/>
-                <Button Margin="209,346,74,42" Content="Оглушение" Click="Button_Click" Name="Оглушение"></Button>
+                
+                <Button Margin="203,348,80,0" Click="stunClick" Name="stunButton" Content="Оглушение" Height="41" VerticalAlignment="Top">
+
+                </Button>
+
+
+
             </Grid>
         </Border>
         <Border
@@ -70,7 +82,7 @@
         Margin="10"
         Background="#FFFDFDFD"
         Grid.Column="1">
-            
+
 
             <Grid>
                 <Image
@@ -95,10 +107,10 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Margin="10, 0, 0, 100"/>
-                
+
             </Grid>
         </Border>
-        
+
     </Grid>
 
 </Window>

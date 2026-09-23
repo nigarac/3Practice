@@ -26,7 +26,8 @@ namespace ПрактическаяРабота3
 
         public List<classes.PersonInfo> Enemys = new List<classes.PersonInfo>();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        public classes.PersonInfo Enemy = new classes.PersonInfo("enemy",100,10,1,0,0,9);
+        public classes.PersonInfo Enemy;
+        //public classes.PersonInfo Enemy = new classes.PersonInfo("enemy",100,10,1,0,0,9);
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace ПрактическаяРабота3
             Enemys.Add(new classes.PersonInfo("ооао", 50, 3, 1, 1, 10, 15));
             
             dispatcherTimer.Tick += AttackPlayer;
-            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 5);
+            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
             SelectEnemy();
         }
@@ -57,8 +58,19 @@ namespace ПрактическаяРабота3
         }
         private void AttackPlayer(object sender, System.EventArgs e)
         {
+            
             Player.Health -= Convert.ToInt32(Enemy.Damage * 100f / (100f - Player.Armor));
+            if (Player.Health < 0) Player.Health = 0;
             UserInfoPlayer();
+            if (Player.Health == 0)
+            {
+                dispatcherTimer.Stop();
+
+                MessageBox.Show("ИГРА ОКОНЧЕНА");
+                this.Close();
+
+            }
+            
         }
         public void UserInfoPlayer()
         {
@@ -93,11 +105,56 @@ namespace ПрактическаяРабота3
                 emptyArmor.Content = "Броня: " + Enemy.Armor;
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+            DispatcherTimer dispatcherTimerForStun = new DispatcherTimer();
+            //DispatcherTimer dispatcherTimerForTimeInfo = new DispatcherTimer();
+        //int countForInfoTime = 20;
+        private void stunClick(object sender, RoutedEventArgs e)
         {
+            //int countForInfoTime = 20;
+
+            stunButton.Visibility = Visibility.Hidden;
+            //timeLeftInfo.Visibility =  Visibility.Visible;
+
+            
+
             dispatcherTimer.Stop();
-            Оглушение.Hidde
+            dispatcherTimerForStun.Interval = TimeSpan.FromSeconds(20);
+            dispatcherTimerForStun.Tick += EndTimer;
+            dispatcherTimerForStun.Start();
+
+            
+            /// попытка сделать таймер 
+            //timeLeftInfo.Content = $"{countForInfoTime}";
+            
+            //dispatcherTimerForTimeInfo.Interval = TimeSpan.FromSeconds(1);
+            //dispatcherTimerForTimeInfo.Tick += LabelInfoTime;
+            //dispatcherTimerForTimeInfo.Start();
+
+
+
         }
+
+        private void EndTimer(object sender, EventArgs e)
+        {
+            
+            
+            
+            dispatcherTimerForStun.Stop();
+            stunButton.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
+        }
+        //private void LabelInfoTime(object sender, EventArgs e)
+        //{
+        //    countForInfoTime --;
+        //    timeLeftInfo.Content = $"{countForInfoTime}";
+
+        //    if (countForInfoTime == 0)
+        //    {
+        //        dispatcherTimerForTimeInfo.Stop();
+        //        timeLeftInfo.Visibility = Visibility.Hidden;
+        //    }
+        //}
+
+
     }
 }
