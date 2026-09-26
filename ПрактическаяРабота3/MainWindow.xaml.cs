@@ -21,6 +21,7 @@ namespace ПрактическаяРабота3
     /// </summary>
     public partial class MainWindow : Window
     {
+        
 
         public classes.PersonInfo Player = new classes.PersonInfo("студент", 100, 10 ,1,0,0,9);
 
@@ -54,6 +55,19 @@ namespace ПрактическаяРабота3
                 Enemys[Id].Glasses,
                 Enemys[Id].Money,
                 Enemys[Id].Damage);
+
+            if (Id == 0)
+            {
+                emptyImage.Source = new BitmapImage(new Uri("/monstr3.jpeg", UriKind.Relative)); 
+            }
+            if (Id == 1)
+            {
+                emptyImage.Source = new BitmapImage(new Uri("/Image/monstr2.jfif", UriKind.Relative));
+            }
+            if (Id == 2)
+            {
+                emptyImage.Source = new BitmapImage(new Uri("/Image/monst1.jfif", UriKind.Relative));
+            }
 
         }
         private void AttackPlayer(object sender, System.EventArgs e)

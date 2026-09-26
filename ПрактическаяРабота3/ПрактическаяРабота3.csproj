@@ -107,13 +107,13 @@
     <None Include="Image\knight2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\monst1.jfif" />
+    <Resource Include="Image\monst1.jfif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\monstr2.jfif" />
+    <Resource Include="Image\monstr2.jfif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\monstr3.jpeg" />
+    <Resource Include="Image\monstr3.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="knight1.jpg" />
