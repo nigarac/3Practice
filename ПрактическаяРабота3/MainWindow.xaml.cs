@@ -38,7 +38,7 @@ namespace ПрактическаяРабота3
             Enemys.Add(new classes.PersonInfo("ооао", 50, 3, 1, 1, 10, 15));
             
             dispatcherTimer.Tick += AttackPlayer;
-            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
             SelectEnemy();
         }
@@ -61,6 +61,7 @@ namespace ПрактическаяРабота3
             
             Player.Health -= Convert.ToInt32(Enemy.Damage * 100f / (100f - Player.Armor));
             if (Player.Health < 0) Player.Health = 0;
+
             UserInfoPlayer();
             if (Player.Health == 0)
             {
@@ -91,9 +92,28 @@ namespace ПрактическаяРабота3
         }
         private void AttackEnemy(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            Random kritDamage = new Random();
             Enemy.Health -= Convert.ToInt32(Player.Damage * 100f / (100f - Enemy.Armor));
+            if (kritDamage.Next(10) == 1 && !isStunned)
+            {
+                int Damage = Convert.ToInt32(Enemy.Damage * 100f / (100f - Player.Armor));
+                Player.Health -=Damage;
+                UserInfoPlayer();
+            }
+            if (Player.Health <= 0)
+            {
+                Player.Health = 0;
+
+                dispatcherTimer.Stop();
+                UserInfoPlayer();
+                MessageBox.Show("ИГРА ОКОНЧЕНА");
+                this.Close();
+
+            }
+
             if (Enemy.Health <= 0)
             {
+
                 Player.Glasses += Enemy.Glasses;
                 Player.Money += Enemy.Money;
                 UserInfoPlayer();
@@ -104,56 +124,31 @@ namespace ПрактическаяРабота3
                 emptyHealth.Content = "Жизненные показатели: " + Enemy.Health;
                 emptyArmor.Content = "Броня: " + Enemy.Armor;
             }
+            
         }
             DispatcherTimer dispatcherTimerForStun = new DispatcherTimer();
-            //DispatcherTimer dispatcherTimerForTimeInfo = new DispatcherTimer();
-        //int countForInfoTime = 20;
+
+
+        bool isStunned = false; ///БУЛ ПЕРЕМЕННАЯ ДЛЯ ТОГО ЧТОБЫ МОБ НЕ НАНОСИЛ КОНТРАТАКУ ПРИ ОГЛУШЕНИИ
         private void stunClick(object sender, RoutedEventArgs e)
         {
-            //int countForInfoTime = 20;
-
             stunButton.Visibility = Visibility.Hidden;
-            //timeLeftInfo.Visibility =  Visibility.Visible;
-
-            
-
+            isStunned = true;
             dispatcherTimer.Stop();
             dispatcherTimerForStun.Interval = TimeSpan.FromSeconds(20);
             dispatcherTimerForStun.Tick += EndTimer;
             dispatcherTimerForStun.Start();
 
-            
-            /// попытка сделать таймер 
-            //timeLeftInfo.Content = $"{countForInfoTime}";
-            
-            //dispatcherTimerForTimeInfo.Interval = TimeSpan.FromSeconds(1);
-            //dispatcherTimerForTimeInfo.Tick += LabelInfoTime;
-            //dispatcherTimerForTimeInfo.Start();
-
-
-
         }
 
         private void EndTimer(object sender, EventArgs e)
         {
-            
-            
-            
+            isStunned = false;
             dispatcherTimerForStun.Stop();
             stunButton.Visibility = Visibility.Visible;
             dispatcherTimer.Start();
         }
-        //private void LabelInfoTime(object sender, EventArgs e)
-        //{
-        //    countForInfoTime --;
-        //    timeLeftInfo.Content = $"{countForInfoTime}";
 
-        //    if (countForInfoTime == 0)
-        //    {
-        //        dispatcherTimerForTimeInfo.Stop();
-        //        timeLeftInfo.Visibility = Visibility.Hidden;
-        //    }
-        //}
 
 
     }

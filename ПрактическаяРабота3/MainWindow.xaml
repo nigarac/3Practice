@@ -66,10 +66,8 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Margin="10, 0, 0, 10"/>
-                
-                <Button Margin="203,348,80,0" Click="stunClick" Name="stunButton" Content="Оглушение" Height="41" VerticalAlignment="Top">
 
-                </Button>
+                <Button Margin="203,0,80,10" Click="stunClick" Name="stunButton" Content="Оглушение" Height="54" VerticalAlignment="Bottom"/>
 
 
 
